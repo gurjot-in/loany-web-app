@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-widthheight=device-height,initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Loany | Elixir Developer Coding Exercise</title>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <div class="loanyFormContent">
+            <h2 class="active underlineHover"> Loan application form </h2>
+            <!-- Application Form -->
+            <form action="" method="POST">
+                <input type="text" id="Name" class="fadeIn second" name="name" placeholder="name" required>
+                <input type="email" id="email" class="fadeIn third" name="email" placeholder="email" required>
+                <input type="number" min="0" id="phone" class="fadeIn fourth" name="phone"
+                       placeholder="Phone" required>
+                <input type="number" min="0" id="requestamount" class="fadeIn third" name="requestamount"
+                       placeholder="Requested amount loan (SEK)" required>
+                <input type="submit" class="fadeIn fifth" value="Submit " id = "submit_button">
+            </form>
+        </div>
+        <div class="loanyImgContent">
+            <img src="https://images.ctfassets.net/sc3s5qkoavi2/3w95VfBWbi2zzkruZcSCZw/29aa8f6c422e905674bc07f3cf4c368c/Bynk_logo.svg" alt="loany_logo"
+                 class="fadeIn first">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
