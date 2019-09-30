@@ -2,15 +2,6 @@ defmodule BynkLoany.Credit.Algo do
     alias BynkLoany.Credit
     alias BynkLoany.Credit.User
 
-    # evaluating the application
-    def evaluate_application(amount) do
-      with {:ok} <- is_loan_amount_lowest(amount),
-           {:ok, rate} <- calculate_interest_rate(amount) do
-        {:ok, rate}
-      else
-        {:error, reason} -> {:error, reason}
-      end
-    end
 
     def are_conditions_satisfied(attrs) do
 
@@ -70,7 +61,18 @@ defmodule BynkLoany.Credit.Algo do
         |> Enum.any?(fn a -> rem(num, a)==0 end)
       !notprime
     end
+
     
+    def application_review(amount) do
+      with {:ok} <- is_loan_amount_lowest(amount),
+           {:ok, rate} <- calculate_interest_rate(amount) do
+        {:ok, rate}
+      else
+        {:error, reason} -> {:error, reason}
+      end
+    end
+
+
     # check if the application amount is larger than the smallest prev application
     def is_loan_amount_lowest(amount) do
         {status, result} = Cachex.get(:my_cache, "current_lowest_loan_amount")

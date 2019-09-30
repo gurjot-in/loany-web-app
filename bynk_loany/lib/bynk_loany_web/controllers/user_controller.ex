@@ -15,14 +15,11 @@ defmodule BynkLoanyWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     IO.inspect(user_params)
     loan_amount = user_params["loan_amount"]
-    case Algo.evaluate_application(loan_amount) do
+    case Algo.application_review(loan_amount) do
       {:ok, rate} ->  
         modified_user_params = Map.put(user_params, "rate_of_interest", rate)
         modified_user_params = Map.put(modified_user_params, "is_approved", true)
         {:ok, %User{} = user} = Credit.create_user(modified_user_params) 
-        conn
-        |> put_status(:created)
-        # |> json(%{status: "approved", data: %{id: user.id, email: user.email}})
         render(conn, "show.json", user: user)
 
       {:error, reason}-> 
@@ -30,9 +27,6 @@ defmodule BynkLoanyWeb.UserController do
         IO.inspect reason
         modified_user_params = Map.put(user_params, "is_approved", false)
         {:ok, %User{} = user} = Credit.create_user(modified_user_params) 
-        conn
-        |> put_status(:created)
-        # |> json(%{status: "approved", data: %{id: user.id, email: user.email}})
         render(conn, "show.json", user: user)
 
     end
@@ -47,7 +41,7 @@ defmodule BynkLoanyWeb.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Credit.get_user!(id)
-
+    Cachex.reset(:my_cache)
     with {:ok, %User{} = user} <- Credit.update_user(user, user_params) do
       render(conn, "show.json", user: user)
     end
@@ -55,7 +49,7 @@ defmodule BynkLoanyWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Credit.get_user!(id)
-
+    Cachex.reset(:my_cache)
     with {:ok, %User{}} <- Credit.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
