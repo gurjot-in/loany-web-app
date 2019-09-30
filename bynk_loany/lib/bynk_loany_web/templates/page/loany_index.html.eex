@@ -19,9 +19,9 @@
                 <form id="loanyForm" onsubmit="onSubmitLoanyForm(); return false">
                     <input class="fadeIn second" id="Name" name="name" placeholder="Name" required type="text">
                     <input class="fadeIn second" id="email" name="email" placeholder="Email" required type="email">
-                    <input class="fadeIn second" id="phone" min="0" name="phone" placeholder="Phone" required type="number">
-                    <input class="fadeIn second" id="requestamount" min="0" name="requestAmount" placeholder="Requested amount loan (SEK)" required type="number">
-                    <input class="fadeIn second" id="submit" type="submit" value="Log In">
+                    <input class="fadeIn second" id="phone" min="0" name="phone_number" placeholder="Phone" required type="number">
+                    <input class="fadeIn second" id="requestamount" min="0" name="loan_amount" placeholder="Requested amount loan (SEK)" required type="number">
+                    <input class="fadeIn second" id="submit" type="submit" value="Submit">
                 </form>
             </div>
             <div class="loanyImgContent">
