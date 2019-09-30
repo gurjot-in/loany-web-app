@@ -17,9 +17,9 @@
             <form action="" method="POST">
                 <input type="text" id="Name" class="fadeIn second" name="name" placeholder="name" required>
                 <input type="email" id="email" class="fadeIn third" name="email" placeholder="email" required>
-                <input type="number" min="0" id="phone" class="fadeIn fourth" name="phone"
+                <input type="number" min="0" id="phone" class="fadeIn fourth" name="phone_number"
                        placeholder="Phone" required>
-                <input type="number" min="0" id="requestamount" class="fadeIn third" name="requestamount"
+                <input type="number" min="0" id="requestamount" class="fadeIn third" name="loan_amount"
                        placeholder="Requested amount loan (SEK)" required>
                 <input type="submit" class="fadeIn fifth" value="Submit " id = "submit_button">
             </form>
