@@ -19,6 +19,11 @@ defmodule BynkLoanyWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/api", BynkLoanyWeb  do
+    pipe_through :api
+
+    resources "/users", UserController
+  end
   # Other scopes may use custom stacks.
   # scope "/api", BynkLoanyWeb do
   #   pipe_through :api
