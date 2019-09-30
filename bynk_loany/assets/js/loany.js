@@ -74,9 +74,9 @@ $(document).ready(function(){
             error: function(errorRes) {
                 const {responseJSON:{error}} = errorRes;
                 console.log(error);
-                $('.loanyLoader').hide();
-                $(".loanyFailureFormContent").show();
-                setTimeout(() => tryAgain(),3000);
+                // $('.loanyLoader').hide();
+                // $(".loanyFailureFormContent").show();
+                // setTimeout(() => tryAgain(),3000);
             }
         });
     }
