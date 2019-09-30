@@ -1,35 +1,86 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-widthheight=device-height,initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <meta content="width=device-width" name="viewport">
     <title>Loany | Elixir Developer Coding Exercise</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <div class="loanyFormContent">
-            <h2 class="active underlineHover"> Loan application form </h2>
-            <!-- Application Form -->
-            <form action="" method="POST">
-                <input type="text" id="Name" class="fadeIn second" name="name" placeholder="name" required>
-                <input type="email" id="email" class="fadeIn third" name="email" placeholder="email" required>
-                <input type="number" min="0" id="phone" class="fadeIn fourth" name="phone_number"
-                       placeholder="Phone" required>
-                <input type="number" min="0" id="requestamount" class="fadeIn third" name="loan_amount"
-                       placeholder="Requested amount loan (SEK)" required>
-                <input type="submit" class="fadeIn fifth" value="Submit " id = "submit_button">
-            </form>
+        <!--        Actual Loan application form-->
+        <div class="loanyApplicationForm">
+            <div class="loanyFormContent">
+                <h2 class="active underlineHover"> Loan application form </h2>
+                <!-- Application Form -->
+                <form id="loanyForm" onsubmit="onSubmitLoanyForm(); return false">
+                    <input class="fadeIn second" id="Name" name="name" placeholder="Name" required type="text">
+                    <input class="fadeIn second" id="email" name="email" placeholder="Email" required type="email">
+                    <input class="fadeIn second" id="phone" min="0" name="phone" placeholder="Phone" required type="number">
+                    <input class="fadeIn second" id="requestamount" min="0" name="requestAmount" placeholder="Requested amount loan (SEK)" required type="number">
+                    <input class="fadeIn second" id="submit" type="submit" value="Log In">
+                </form>
+            </div>
+            <div class="loanyImgContent">
+                <img alt="loany_logo" class="fadeIn first" src="https://www.dropbox.com/s/zt6wds0clxq8an1/loanyIcon.svg?raw=1">
+            </div>
         </div>
-        <div class="loanyImgContent">
-            <img src="https://images.ctfassets.net/sc3s5qkoavi2/3w95VfBWbi2zzkruZcSCZw/29aa8f6c422e905674bc07f3cf4c368c/Bynk_logo.svg" alt="loany_logo"
-                 class="fadeIn first">
+        <!--        Actual Loan application form  ends-->
+
+        <!--        loader starts-->
+        <div class="loanyLoader hidden">
+            <img src='/images/loader.svg'>
+            <p>loading...</p>
         </div>
+        <!--        loader ends-->
+
+        <!--        onSuccess form Submission-->
+        <div class="loanySuccessFormContent hidden">
+            <h3>Loan offer</h3>
+            <div class="loanySuccessFormContentLoanAmount">
+                <h4>Approved Loan</h4>
+                <h3></h3>
+            </div>
+            <div class="loanySuccessUserDetails">
+                <h3>Customer Details</h3>
+                <div class="loanySuccessUserDetailsInfo">
+                    <h4>
+                        <span>Name: </span>
+                    </h4>
+                    <h4>
+                        <span>Email: </span>
+                    </h4>
+                    <h4>
+                        <span>Phone: </span>
+                    </h4>
+                    <h4>
+                        <span>Amount: </span>
+                    </h4>
+                </div>
+            </div>
+            <div class="loanySuccessFormFooter">
+                <p>Copyright © 2012–2019 Bynk AB.</p>
+            </div>
+        </div>
+        <!--        onSuccess form Submission ends-->
+
+        <!--        onFailure form Submission-->
+        <div class="loanyFailureFormContent hidden">
+            <h3>Loan Rejection</h3>
+            <div class="loanyfailureFormContentLoanAmount">
+                <img src="/images/error.png" alt="error">
+                <h4>It seems like we couldn't grant loan</h4>
+            </div>
+            <input class="fadeIn" type="button" value='← Try again' onclick="tryAgain()" />
+
+        </div>
+        <!--        onFailure form Submission ends-->
     </div>
 </div>
-
+<script async='async' defer='defer' src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 </body>
+
 </html>
