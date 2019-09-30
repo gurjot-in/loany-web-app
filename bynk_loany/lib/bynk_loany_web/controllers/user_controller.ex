@@ -13,7 +13,8 @@ defmodule BynkLoanyWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    IO.inspect(user_params)
+    user_params = User.sanitize_user_data(user_params)
+    IO.inspect user_params
     loan_amount = user_params["loan_amount"]
     case Algo.application_review(loan_amount) do
       {:ok, rate} ->  
