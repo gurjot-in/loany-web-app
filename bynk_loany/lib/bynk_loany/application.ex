@@ -11,9 +11,10 @@ defmodule BynkLoany.Application do
       # Start the Ecto repository
       BynkLoany.Repo,
       # Start the endpoint when the application starts
-      BynkLoanyWeb.Endpoint
+      BynkLoanyWeb.Endpoint,
       # Starts a worker by calling: BynkLoany.Worker.start_link(arg)
       # {BynkLoany.Worker, arg},
+      {Cachex, :my_cache }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

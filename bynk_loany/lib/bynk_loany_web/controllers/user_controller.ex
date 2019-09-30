@@ -3,6 +3,7 @@ defmodule BynkLoanyWeb.UserController do
 
   alias BynkLoany.Credit
   alias BynkLoany.Credit.User
+  alias BynkLoany.Credit.Algo
 
   action_fallback BynkLoanyWeb.FallbackController
 
@@ -12,12 +13,31 @@ defmodule BynkLoanyWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Credit.create_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> render("show.json", user: user)
+    IO.inspect(user_params)
+    loan_amount = user_params["loan_amount"]
+    case Algo.evaluate_application(loan_amount) do
+      {:ok, rate} ->  
+        modified_user_params = Map.put(user_params, "rate_of_interest", rate)
+        modified_user_params = Map.put(modified_user_params, "is_approved", true)
+        {:ok, %User{} = user} = Credit.create_user(modified_user_params) 
+        conn
+        |> put_status(:created)
+        # |> json(%{status: "approved", data: %{id: user.id, email: user.email}})
+        render(conn, "show.json", user: user)
+
+      {:error, reason}-> 
+        IO.inspect "reason of rejection"
+        IO.inspect reason
+        modified_user_params = Map.put(user_params, "is_approved", false)
+        {:ok, %User{} = user} = Credit.create_user(modified_user_params) 
+        conn
+        |> put_status(:created)
+        # |> json(%{status: "approved", data: %{id: user.id, email: user.email}})
+        render(conn, "show.json", user: user)
+
     end
+
+
   end
 
   def show(conn, %{"id" => id}) do
