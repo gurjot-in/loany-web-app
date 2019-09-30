@@ -29,7 +29,7 @@ defmodule BynkLoanyWeb.UserController do
         modified_user_params = Map.put(user_params, "is_approved", false)
         {:ok, %User{} = user} = Credit.create_user(modified_user_params) 
         conn
-        |> put_status(:precondition_failed)
+        |> put_status(:created)
         |> json(%{data: %{"status" => user.is_approved, "email" => user.email, "reason" => reason}})
 
     end
