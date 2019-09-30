@@ -73,7 +73,6 @@ defmodule BynkLoany.Credit.Algo do
     end
 
 
-    # check if the application amount is larger than the smallest prev application
     def is_loan_amount_lowest(amount) do
         {status, result} = Cachex.get(:my_cache, "current_lowest_loan_amount")
         IO.inspect {status, result}
@@ -92,13 +91,12 @@ defmodule BynkLoany.Credit.Algo do
                 {:ok}
             amount < result ->
                 IO.inspect "amount less"
-                {:error, "meri marzi haiiii"}
+                {:error, "apply with a greater loan amount"}
             
         end
 
     end
   
-    # set the interest rate
     def calculate_interest_rate(amount) do
       if prime?(amount) do
         {:ok, 9.99}
