@@ -54,6 +54,8 @@ $(document).ready(function(){
             data: data,
             success: function(response) {
                 console.log(response)
+                loan_status = response.data.status
+                if (loan_status == true){
                 $('.loanyLoader').hide();
                 $('.loanySuccessFormContent').show();
                 // Filling server Info
@@ -62,6 +64,12 @@ $(document).ready(function(){
                 $('.loanySuccessFormContent .loanySuccessUserDetailsInfo h4:nth-child(2)').append(`${response.data.email}`)
                 $('.loanySuccessFormContent .loanySuccessUserDetailsInfo h4:nth-child(3)').append(`${response.data.phone_number}`)
                 $('.loanySuccessFormContent .loanySuccessUserDetailsInfo h4:nth-child(4)').append(`${response.data.loan_amount}`)
+                }
+                else {
+                    $('.loanyLoader').hide();
+                    $(".loanyFailureFormContent").show();
+                    setTimeout(() => tryAgain(),5000);
+                }
             },
             error: function(errorRes) {
                 const {responseJSON:{error}} = errorRes;
