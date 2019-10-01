@@ -17,6 +17,7 @@ defmodule BynkLoany.Credit.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :email, :phone_number, :loan_amount, :is_approved, :rate_of_interest])
+    |> validate_format(:email, ~r/@/)
     |> validate_required([:name, :email, :phone_number, :loan_amount, :is_approved])
   end
 
