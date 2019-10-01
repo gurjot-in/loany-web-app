@@ -76,7 +76,7 @@ h2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 500px;
+  height: auto;
   background: -webkit-gradient(
           linear,
           left top, left bottom,
@@ -151,7 +151,7 @@ h2 {
   margin-bottom: 5px;
 }
 .loanySuccessFormContent .loanySuccessUserDetailsInfo h4{
-margin: 0;
+  margin: 0;
   line-height: 2;
 }
 .loanySuccessFormContent .loanySuccessUserDetailsInfo span {
@@ -210,7 +210,7 @@ input[type=button], input[type=submit], input[type=reset] {
   background-color: #9b7ddc;
   border: none;
   color: white;
-  padding: 1px 80px;
+  padding: 15px 80px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
