@@ -7,7 +7,7 @@ defmodule BynkLoany.Credit.User do
     field :is_approved, :boolean, default: false
     field :loan_amount, :integer
     field :name, :string
-    field :phone_number, :integer
+    field :phone_number, :string
     field :rate_of_interest, :float
 
     timestamps()
@@ -48,10 +48,9 @@ defmodule BynkLoany.Credit.User do
     # IO.inspect "attrs"
     # IO.inspect attrs
     # attrs
-    {phone_number, _}  = :string.to_integer(to_charlist(attrs["phone_number"]))
     {loan_amount, _} = :string.to_integer(to_charlist(attrs["loan_amount"]))
 
-    Map.merge(attrs, %{"phone_number" => phone_number, "loan_amount" => loan_amount})
+    Map.merge(attrs, %{"loan_amount" => loan_amount})
 
   end
 
