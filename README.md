@@ -26,3 +26,11 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+# Errors
+
+- for postgres authentication related issues use below solution
+
+    `$ sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';" `
+
+    ` sudo service postgresql restart `
