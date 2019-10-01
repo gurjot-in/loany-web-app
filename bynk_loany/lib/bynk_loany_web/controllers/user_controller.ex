@@ -16,21 +16,21 @@ defmodule BynkLoanyWeb.UserController do
     user_params = User.sanitize_user_data(user_params)
     IO.inspect user_params
     loan_amount = user_params["loan_amount"]
+    
     case Algo.application_review(loan_amount) do
       {:ok, rate} ->  
-        modified_user_params = Map.put(user_params, "rate_of_interest", rate)
-        modified_user_params = Map.put(modified_user_params, "is_approved", true)
-        {:ok, %User{} = user} = Credit.create_user(modified_user_params) 
-        render(conn, "show.json", user: user)
+        user_params = Map.merge(user_params, %{"is_approved" => true, "rate_of_interest" => rate})
+        with {:ok, %User{} = user} <- Credit.create_user(user_params) do
+          render(conn, "show.json", user: user)
+        end
 
       {:error, reason}-> 
         IO.inspect "reason of rejection"
         IO.inspect reason
-        modified_user_params = Map.put(user_params, "is_approved", false)
-        {:ok, %User{} = user} = Credit.create_user(modified_user_params) 
-        conn
-        |> put_status(:created)
-        |> json(%{data: %{"status" => user.is_approved, "email" => user.email, "reason" => reason}})
+        user_params = Map.merge(user_params, %{"is_approved" => false})
+        with {:ok, %User{} = user} <- Credit.create_user(user_params) do
+          render(conn, "show.json", user: user)
+        end
 
     end
 
