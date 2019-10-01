@@ -5,27 +5,17 @@ defmodule BynkLoany.Credit.Algo do
 
     def are_conditions_satisfied(attrs) do
 
-      # {:ok, var}  = Scoring.evaluate_application(112)
-      {:error, 123123}
       current_changeset = User.changeset(%User{}, attrs)
+      IO.inspect "current changeset"
       IO.inspect current_changeset
-      # # IO.inspect current_changeset
-      # updated_changeset = change(current_changeset, %{is_active: true})
-      # apply_changes(updated_changeset)
-      # IO.inspect updated_changeset
   
-      # with is_valid <- changeset.valid?, 
-      #      {:ok, var} <- Scoring.test()
-      # do
-      #   changes = changeset.changes
-      #   changes["is_active"] = true
-      #   changeset.changes = changes
-      # else
-      #   err -> err
-      #   IO.inspect "error ha bsdk"
-      
-      #   changeset
-      
+      with true <- current_changeset.valid? do
+        {:ok}
+      else
+        err -> err
+        IO.inspect err
+        {:error, current_changeset.errors}    
+      end  
   
     end
     
