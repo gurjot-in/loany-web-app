@@ -26,7 +26,7 @@
                 </form>
             </div>
             <div class="loanyImgContent">
-                <img alt="loany_logo" class="fadeIn first" src="https://www.dropbox.com/s/zt6wds0clxq8an1/loanyIcon.svg?raw=1">
+                <img alt="loany_logo" class="fadeIn first" src="/images/loanysvgicon.svg">
             </div>
         </div>
         <!--        Actual Loan application form  ends-->

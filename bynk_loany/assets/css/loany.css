@@ -81,19 +81,19 @@ h2 {
           rgba(0, 0, 0, 0.6),
           rgba(0, 0, 0, 0.6)
   ),
-  url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg);
+  url(/images/skyscrapers.jpg);
   background: -webkit-gradient(
           linear,
           left top, left bottom,
           from(rgba(0, 0, 0, 0.6)),
           to(rgba(0, 0, 0, 0.6))
   ),
-  url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg);
+  url(/images/skyscrapers.jpg);
   background: linear-gradient(
           rgba(0, 0, 0, 0.6),
           rgba(0, 0, 0, 0.6)
   ),
-  url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg);
+  url(/images/skyscrapers.jpg);
   background-size: cover;
   min-width: calc(100% - 75%);
   border-radius: 0px 10px 10px 0px;
