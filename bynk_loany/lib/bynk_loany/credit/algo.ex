@@ -2,6 +2,8 @@ defmodule BynkLoany.Credit.Algo do
     alias BynkLoany.Credit
     alias BynkLoany.Credit.User
 
+
+    #find min loan amount from db if cache hit missed, if db empty return requested amount as lowest
     def find_min_from_db(amount) do
         IO.inspect "here in db"
         users = Credit.list_users()
@@ -9,7 +11,7 @@ defmodule BynkLoany.Credit.Algo do
         if len > 0 do
           Enum.min(Enum.map(users, fn (x) -> x.loan_amount end))
         else
-          amount
+          amount   
         end
 
     end
@@ -38,22 +40,17 @@ defmodule BynkLoany.Credit.Algo do
 
     def is_loan_amount_lowest(amount) do
         {status, result} = Cachex.get(:my_cache, "current_lowest_loan_amount")
-        IO.inspect {status, result}
-        IO.inspect "checking datatype"
-        IO.inspect result
-        IO.inspect amount
-        
         cond do
             result === nil ->
+                IO.inspect "Cache hit missed , fetching from db now"
                 min_till_now =  find_min_from_db(amount)
-                IO.inspect min_till_now
+
+                #update cache with the current lowest 
                 Cachex.put(:my_cache, "current_lowest_loan_amount", min_till_now)
                 {:ok}
             amount >= result ->
-                IO.inspect "amount greater"
                 {:ok}
             amount < result ->
-                IO.inspect "amount less"
                 {:error, "apply with a greater loan amount"}
             
         end

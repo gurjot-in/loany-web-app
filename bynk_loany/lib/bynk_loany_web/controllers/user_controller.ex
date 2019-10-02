@@ -18,6 +18,7 @@ defmodule BynkLoanyWeb.UserController do
     loan_amount = user_params["loan_amount"]
     
     case Algo.application_review(loan_amount) do
+      # loan approved
       {:ok, rate} ->  
         user_params = Map.merge(user_params, %{"is_approved" => true, "rate_of_interest" => rate})
         with {:ok, %User{} = user} <- Credit.create_user(user_params) do
@@ -25,6 +26,7 @@ defmodule BynkLoanyWeb.UserController do
         end
 
       {:error, reason}-> 
+        # loan rejected
         IO.inspect "reason of rejection"
         IO.inspect reason
         user_params = Map.merge(user_params, %{"is_approved" => false})
