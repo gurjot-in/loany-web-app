@@ -19,9 +19,8 @@
                 <form id="loanyForm" onsubmit="onSubmitLoanyForm(); return false">
                     <input class="fadeIn second" id="name" name="name" placeholder="Name" pattern="^[a-zA-Z -]*$" required type="text"  oninvalid="this.setCustomValidity('Name can only be alphabet')" onchange="try{setCustomValidity('')}catch(e){}">
                     <input class="fadeIn second" id="email" name="email" placeholder="Email" required type="email">
-                    <input class="fadeIn second" id="phone" min="0" name="phone_number" pattern="\d*"
-                    placeholder="Phone" required type="text" maxlength="8" oninvalid="this.setCustomValidity('Only digits allowed')" onchange="try{setCustomValidity('')}catch(e){}">
-                    <input class="fadeIn second" id="requestamount" min="0" name="loan_amount" placeholder="Requested amount loan (SEK)" required type="number">
+                    <input class="fadeIn second" id="phone" min="0" name="phone_number" placeholder="Phone"  type="text" pattern="\d*" maxlength="9" oninvalid="this.setCustomValidity('Phone number can be number only')" onchange="try{setCustomValidity('')}catch(e){}" required>
+                    <input class="fadeIn second" id="requestamount" min="0" type="text" pattern="\d*" maxlength="9" name="loan_amount" placeholder="Requested amount loan (SEK)" oninvalid="this.setCustomValidity('Requested amount can be number only')" onchange="try{setCustomValidity('')}catch(e){}" required>
                     <input class="fadeIn second" id="submit" type="submit" value="Submit">
                 </form>
             </div>
