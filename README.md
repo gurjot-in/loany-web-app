@@ -1,6 +1,7 @@
 
 
 
+
 # Welcome to Loany .  A web app in Phoenix/Elixir
 
 You will need to setup Phoenix/Elixir in your local machine to run the project
@@ -39,7 +40,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
     ` sudo service postgresql restart `
 
  - If still not resolved follow [`postgres guide`](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
+ 
+ - if **users** table is not created  
 
+     `mix ecto.drop`
+     
+     `mix ecto.create`
+     
+     `mix ecto.migrate`
 
 # Test Cases/Assumptions
 
