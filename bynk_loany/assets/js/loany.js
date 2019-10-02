@@ -36,7 +36,7 @@ $(document).ready(function() {
           ).append(`${phone_number}`);
           $(
             ".loanySuccessFormContent .loanySuccessUserDetailsInfo h4:nth-child(4)"
-          ).append(`${loan_amount} sek`);
+          ).append(`SEK ${loan_amount}`);
         } else {
           showErrorPage();
         }
