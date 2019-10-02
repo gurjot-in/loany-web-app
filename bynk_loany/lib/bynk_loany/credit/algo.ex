@@ -16,6 +16,7 @@ defmodule BynkLoany.Credit.Algo do
 
     end
 
+    #checking prime
     def prime?(2), do: :true
     def prime?(num) do
       last = num
@@ -27,7 +28,7 @@ defmodule BynkLoany.Credit.Algo do
       !notprime
     end
 
-    
+    # review user application using algorithm
     def application_review(amount) do
       with {:ok} <- is_loan_amount_lowest(amount),
            {:ok, rate} <- calculate_interest_rate(amount) do
@@ -38,6 +39,7 @@ defmodule BynkLoany.Credit.Algo do
     end
 
 
+    #check if requested loan amount is lowest or not from cache/db
     def is_loan_amount_lowest(amount) do
         {status, result} = Cachex.get(:my_cache, "current_lowest_loan_amount")
         cond do
@@ -56,7 +58,8 @@ defmodule BynkLoany.Credit.Algo do
         end
 
     end
-  
+    
+    # find interest rate
     def calculate_interest_rate(amount) do
       if prime?(amount) do
         {:ok, 9.99}
