@@ -19,6 +19,8 @@ defmodule BynkLoany.Credit.User do
     |> cast(attrs, [:name, :email, :phone_number, :loan_amount, :is_approved, :rate_of_interest])
     |> validate_format(:email, ~r/@/)
     |> validate_required([:name, :email, :phone_number, :loan_amount, :is_approved])
+    |> validate_number(:loan_amount, less_than: 999999999)
+    |> validate_length(:phone_number, max: 10)
   end
 
   def sanitize_user_data(attrs) do
